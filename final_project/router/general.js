@@ -57,10 +57,12 @@ public_users.get('/title/:title',function (req, res) {
  // return res.status(300).json({message: "Yet to be implemented"});
 });
 
-//  Get book review
+//  TASK 5 Get book review by ISBN
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const isbn = req.params.isbn;
+  res.send(books[isbn].reviews);
+  //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 module.exports.general = public_users;
