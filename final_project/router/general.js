@@ -10,7 +10,7 @@ public_users.post("/register", (req,res) => {
   return res.status(300).json({message: "Yet to be implemented"});
 });
 
-// Get the book list available in the shop
+// TASK 1 Get the book list available in the shop
 public_users.get('/',function (req, res) {
   //Write your code here
     // Send a JSON response containing the users array, formatted with an indentation of 4 spaces for readability
@@ -18,7 +18,7 @@ public_users.get('/',function (req, res) {
  // return res.status(300).json({message: "Yet to be implemented"});
 });
 
-// Get book details based on ISBN
+// TASK 2 Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
   //Write your code here
   const isbn = req.params.isbn;
@@ -28,7 +28,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
   res.send(books[isbn]);
  });
   
-// Get book details based on author
+// TASK 3 Get book details based on author
 public_users.get('/author/:author',function (req, res) {
   //Write your code here
   const author = req.params.author;
@@ -42,10 +42,19 @@ public_users.get('/author/:author',function (req, res) {
   res.send(book);
 });
 
-// Get all books based on title
+// TASK 4 Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const title = req.params.title;
+  let book = [];
+
+  Object.keys(books).forEach(t => {
+    if(books[t].title.toLowerCase() == title.toLowerCase()){
+      book.push(books[t])
+    }
+  });
+  res.send(book);
+ // return res.status(300).json({message: "Yet to be implemented"});
 });
 
 //  Get book review
