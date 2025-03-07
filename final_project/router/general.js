@@ -59,7 +59,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
  });
  */
 
- //TASK 11: Get book details based on ISBN by Promise
+ //TASK 11 Get book details based on ISBN by Promise
 public_users.get('/isbn/:isbn', function (req, res) {
   const isbn = req.params.isbn;
   getBooksPromise(books[isbn])
@@ -83,7 +83,7 @@ public_users.get('/author/:author',function (req, res) {
   res.send(book);
 });
 */
-//TASK 12: Get book details based on author by async-await
+//TASK 12 Get book details based on author by async-await
 public_users.get('/author/:author', async function (req, res) {
   const author = req.params.author;
   let book = [];
@@ -97,9 +97,7 @@ public_users.get('/author/:author', async function (req, res) {
   res.send(book);
 });
 
-
-
-
+/*
 // TASK 4 Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
@@ -114,6 +112,22 @@ public_users.get('/title/:title',function (req, res) {
   res.send(book);
  // return res.status(300).json({message: "Yet to be implemented"});
 });
+*/
+// TASK 13 Get book details based on title by async/await
+public_users.get('/title/:title', async function (req, res) {
+  const title = req.params.title;
+  let book = [];
+  let bookList = await getBooksPromise(books);
+
+  Object.keys(bookList).forEach(t => {
+      if(bookList[t].title.toLowerCase() == title.toLowerCase()){
+          book.push(bookList[t])
+      }
+  });
+  res.send(book);
+});
+
+
 
 //  TASK 5 Get book review by ISBN
 public_users.get('/review/:isbn',function (req, res) {
