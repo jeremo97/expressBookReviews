@@ -52,11 +52,25 @@ regd_users.post("/login", (req,res) => {
   } 
 });
 
-// Add a book review
+// TASK 8 Add or modify a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    const isbn = req.params.isbn;
+    //console.log(isbn);
+    const username = req.session.authorization.username;
+    //console.log(username);
+    const review = req.body.review;
+
+    if (books[isbn]){
+        books[isbn].reviews[username] = review;
+         res.send(books[isbn].reviews);
+        //console.log(books[isbn].reviews);
+    } else {
+        res.send(`No book with ISBN ${isbn} was found.`);
+    }
+  
 });
+
 
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
