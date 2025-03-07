@@ -49,16 +49,24 @@ public_users.get('/', async function (req, res) {
 
 
 // TASK 2 Get book details based on ISBN
-public_users.get('/isbn/:isbn',function (req, res) {
+//public_users.get('/isbn/:isbn',function (req, res) {
   //Write your code here
-  const isbn = req.params.isbn;
-  // Filter the books array to find users whose isbn matches the extracted isbn paramter
-   // let filtered_users = users.filter((user) => user.isbn === isbn);
- // Send the filtered_users array as the response to the client
-  res.send(books[isbn]);
- });
+  //const isbn = req.params.isbn;
+  //// Filter the books array to find users whose isbn matches the extracted isbn paramter
+   //// let filtered_users = users.filter((user) => user.isbn === isbn);
+ //// Send the filtered_users array as the response to the client
+  //res.send(books[isbn]);
+ //});
 
- 
+ //TASK 11: Get book details based on ISBN by Promise
+public_users.get('/isbn/:isbn', function (req, res) {
+  const isbn = req.params.isbn;
+  getBooksPromise(books[isbn])
+  .then(
+      result => res.send(result),
+      error => res.send(error)
+  )
+});
   
 // TASK 3 Get book details based on author
 public_users.get('/author/:author',function (req, res) {
