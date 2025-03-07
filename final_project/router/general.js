@@ -21,13 +21,32 @@ public_users.post("/register", (req,res) => {
   return res.status(404).json({message: "An error occured when trying to register user, please try again. "});
 });
 
+// FOR TASK 10 TO 13 Function with a Promise to be called for async GET requests
+function getBooksPromise(booksRouter) { 
+  return new Promise((resolve, reject) => {
+      if (booksRouter) {
+          resolve(booksRouter);
+      } else {
+          reject("No books were found, please try again with different parameters.");
+        }
+      });
+  }
+
 // TASK 1 Get the book list available in the shop
-public_users.get('/',function (req, res) {
+//public_users.get('/',function (req, res) {
   //Write your code here
     // Send a JSON response containing the users array, formatted with an indentation of 4 spaces for readability
-    res.send(JSON.stringify({books}, null, 4));
- // return res.status(300).json({message: "Yet to be implemented"});
+  //  res.send(JSON.stringify({books}, null, 4));
+//});
+
+// FOR TASK 10 Get the book list available in the shop using async GET requests
+public_users.get('/', async function (req, res) {
+  let bookList = await getBooksPromise(books);
+  res.send(bookList);
 });
+
+
+
 
 // TASK 2 Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
@@ -38,6 +57,8 @@ public_users.get('/isbn/:isbn',function (req, res) {
  // Send the filtered_users array as the response to the client
   res.send(books[isbn]);
  });
+
+ 
   
 // TASK 3 Get book details based on author
 public_users.get('/author/:author',function (req, res) {
